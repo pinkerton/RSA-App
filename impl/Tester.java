@@ -1,6 +1,9 @@
 import java.nio.ByteBuffer;
 import java.io.UnsupportedEncodingException;
 
+// http://sergematovic.tripod.com/rsa1.html
+// http://www.reddit.com/r/programming/comments/1p7f1g/
+
 /**
  * Class containing methods used in the RSA algorithm for encryption
  * and decryption.
