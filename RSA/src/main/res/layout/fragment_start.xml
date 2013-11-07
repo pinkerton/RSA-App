@@ -13,4 +13,141 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:hint="Plain Data"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Encrypt"
+        android:id="@+id/button"
+        android:layout_below="@+id/editText3"
+        android:layout_toRightOf="@+id/button2"
+        android:layout_toLeftOf="@+id/button3" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:hint="Public Key"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/editText"
+        android:inputType="textNoSuggestions" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editText3"
+        android:hint="Private Key"
+        android:layout_below="@+id/editText4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/editText4"
+        android:inputType="textNoSuggestions" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gen Keys"
+        android:id="@+id/button2"
+        android:layout_below="@+id/editText3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Keys"
+        android:id="@+id/button3"
+        android:layout_below="@+id/editText3"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result"
+        android:id="@+id/textView"
+        android:layout_below="@+id/editText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/editText"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_toRightOf="@+id/textView"
+        android:background="@color/grey"
+        android:layout_toLeftOf="@+id/button4" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Copy"
+        android:id="@+id/button4"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentRight="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editText4"
+        android:hint="Max Key"
+        android:layout_below="@+id/editText2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/editText2"
+        android:inputType="textNoSuggestions" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText5"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:hint="Encrypted Data"
+        android:layout_alignRight="@+id/editText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/button5"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toLeftOf="@+id/button6"
+        android:layout_alignBottom="@+id/button6"
+        android:background="@color/grey" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Decrypt"
+        android:id="@+id/button5"
+        android:layout_below="@+id/editText5"
+        android:layout_toRightOf="@+id/button2"
+        android:layout_alignRight="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Copy"
+        android:id="@+id/button6"
+        android:layout_below="@+id/button5"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>
