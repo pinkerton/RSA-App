@@ -32,7 +32,6 @@ public class Start extends Activity
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     *
      */
     private CharSequence mTitle;
 
@@ -320,10 +319,8 @@ public class Start extends Activity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_start, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
 
