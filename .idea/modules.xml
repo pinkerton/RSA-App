@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RSA/RSA.iml" filepath="$PROJECT_DIR$/RSA/RSA.iml" />
       <module fileurl="file://$PROJECT_DIR$/RSA-App.iml" filepath="$PROJECT_DIR$/RSA-App.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RSAProject.iml" filepath="$PROJECT_DIR$/RSAProject.iml" />
     </modules>
   </component>
 </project>

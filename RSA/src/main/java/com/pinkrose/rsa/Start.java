@@ -18,10 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.math.BigInteger;
-import java.util.Random;
-
-;
-
 public class Start extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -51,9 +47,9 @@ public class Start extends Activity
                         (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
-    private EditText dataRaw, privKeyT, pubKeyT, maxKey, encDat;
-    private PrivKey privKey;
-    private PubKey pubKey;
+    private EditText message, privKeyT, pubKeyT, maxKey, encDat;
+    private PrivateKey privKey;
+    private PublicKey pubKey;
     private ClipboardManager cm;
     private TextView t2, t4;
 
@@ -61,10 +57,9 @@ public class Start extends Activity
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        ///*
         cm = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-        dataRaw = (EditText) findViewById(R.id.editText);
+        message = (EditText) findViewById(R.id.editText);
         pubKeyT = (EditText) findViewById(R.id.editText2);
         privKeyT = (EditText) findViewById(R.id.editText3);
         maxKey = (EditText) findViewById(R.id.editText4);
@@ -72,7 +67,6 @@ public class Start extends Activity
 
         t2 = (TextView) findViewById(R.id.textView2);
         t4 = (TextView) findViewById(R.id.textView4);
-
 
         Button encB = (Button) findViewById(R.id.button);
         Button genB = (Button) findViewById(R.id.button2);
@@ -84,14 +78,16 @@ public class Start extends Activity
         encB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                encrypt();
+                t2.setText(RSA.encrypt(message));
             }
         });
 
         setB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setKeys();
+                RSA.setKeys(pubKeyT.getText().toString(),
+                        maxKey.getText().toString(),
+                        privKeyT.getText().toString());
             }
         });
         copyB.setOnClickListener(new View.OnClickListener() {
@@ -104,14 +100,16 @@ public class Start extends Activity
         genB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                genKeys();
+                RSA.genKeys();
+                pubKeyT.setText(RSA.getPubKey().toString());
+                privKeyT.setText(RSA.getPrivKey().toString());
+                maxKey.setText(RSA.getPubKey().mToString());
             }
         });
         decB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                decrypt();
-
+                t4.setText(RSA.decrypt(new BigInteger(encDat.getText().toString())));
             }
         });
         copyB2.setOnClickListener(new View.OnClickListener() {
@@ -121,119 +119,6 @@ public class Start extends Activity
                 cm.setPrimaryClip(data);
             }
         });
-    }
-
-    public BigInteger strToNum(String s) {
-        return new BigInteger(s.getBytes());
-    }
-
-    public String numToStr(BigInteger b) {
-        String s2 = "";
-        int i;
-        while (b.compareTo(BigInteger.ONE) > 0) {
-            i = b.mod(new BigInteger("" + 256)).intValue();
-            s2 = (char) i + s2;
-            b = b.divide(new BigInteger("" + 256));
-        }
-        return s2;
-    }
-
-    public void encrypt() {
-        if (pubKey == null) genKeys();
-        if (dataRaw.getText().toString().equals("")) return;
-        BigInteger enc = strToNum(dataRaw.getText().toString());
-        BigInteger dec = enc.modPow(pubKey.getPub(), pubKey.getModu());
-        t2.setText(dec.toString());
-    }
-
-    public void decrypt() {
-        BigInteger enc = new BigInteger(encDat.getText().toString());
-        //Log.d("MEHHH",  enc.toString());
-        BigInteger raw = enc.modPow(privKey.getPriv(), pubKey.getModu());
-        t4.setText(numToStr(raw));
-    }
-
-    public void setKeys() {
-        pubKey = new PubKey(pubKeyT.getText().toString(),
-                maxKey.getText().toString());
-        privKey = new PrivKey(privKeyT.getText().toString());
-
-    }
-
-    public void genKeys() {
-        Random r = new Random();
-        Random r2 = new Random();
-        BigInteger prime1 = BigInteger.probablePrime(122, r);
-        BigInteger prime2 = BigInteger.probablePrime(126, r2);
-        BigInteger max = prime1.multiply(prime2);
-        BigInteger qui = (prime1.subtract(BigInteger.ONE)).multiply(
-                (prime2.subtract(BigInteger.ONE)));
-        BigInteger prii = new BigInteger("65537");
-        pubKey = new PubKey(new BigInteger("65537"), (max));
-        privKey = new PrivKey(prii.modInverse(qui));
-        pubKeyT.setText(pubKey.toString());
-        privKeyT.setText(privKey.toString());
-        maxKey.setText(pubKey.mToString());
-    }
-
-
-    class PrivKey {
-        private BigInteger priK;
-        private String key;
-
-        PrivKey(String priv) {
-            key = priv;
-            priK = strToNum(priv);
-        }
-
-        PrivKey(BigInteger priv) {
-            key = numToStr(priv);
-            priK = (priv);
-        }
-
-        public BigInteger getPriv() {
-            return priK;
-        }
-
-        public String toString() {
-            return key;
-        }
-    }
-
-    class PubKey {
-        private BigInteger pub;
-        private BigInteger modu;
-        private String mod;
-
-        PubKey(BigInteger exp, BigInteger mod) {
-            //key = numToStr(exp);
-            this.mod = numToStr(mod);
-            pub = exp;
-            modu = (mod);
-        }
-
-        PubKey(String exp, String mod) {
-            //key = exp;
-            this.mod = (mod);
-            pub = new BigInteger(exp);
-            modu = strToNum(mod);
-        }
-
-        public BigInteger getModu() {
-            return modu;
-        }
-
-        public BigInteger getPub() {
-            return pub;
-        }
-
-        public String toString() {
-            return pub.toString();
-        }
-
-        public String mToString() {
-            return mod;
-        }
     }
 
     @Override
